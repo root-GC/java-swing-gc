@@ -1,0 +1,109 @@
+Arquitetura MVC
+A arquitetura MVC (Model-View-Controller) é uma forma de organizar componentes de interface gráfica (GUI) para facilitar o desenvolvimento, a manutenção e a flexibilidade. Ela divide os componentes em três partes principais, cada uma com um papel específico:
+
+
+
+Estrutura de uma projecto MVC
+/project
+├── /model
+│   ├── User.java       # Modelo para o usuário
+│   ├── Product.java    # Modelo para o produto
+│   └── Database.java   # Classe de conexão ou manipulação da base de dados
+├── /view
+│   ├── MainView.java   # Interface principal da aplicação
+│   ├── ProductView.java # Interface para exibir produtos
+│   └── templates/      # Arquivos HTML, se necessário
+│       ├── home.html
+│       └── product.html
+├── /controller
+│   ├── UserController.java    # Gerencia as interações com usuários
+│   ├── ProductController.java # Gerencia ações relacionadas a produtos
+│   └── AppController.java     # Controlador principal
+├── App.java                   # Ponto de entrada da aplicação
+└── README.md                  # Documentação do projeto
+
+
+
+Camadas e Responsabilidades
+Model (/model):
+
+Representa os dados e a lógica de negócios.
+
+Interage com a base de dados ou outras fontes de dados.
+
+Contém classes que mapeiam os objetos de dados.
+
+Exemplo (Java):
+
+
+public class User {
+    private int id;
+    private String name;
+    private String email;
+
+    public User(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters e setters
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+}
+View (/view):
+
+Apresenta os dados ao usuário.
+
+Define a interface gráfica ou de texto (console).
+
+Não deve conter lógica de negócios.
+
+Exemplo (Java):
+
+public class MainView {
+    public void displayMessage(String message) {
+        System.out.println(message);
+    }
+}
+Controller (/controller):
+
+Gerencia a interação entre Model e View.
+
+Processa entradas do usuário, atualiza o modelo e atualiza a visualização.
+
+Exemplo (Java):
+
+
+public class UserController {
+    private User model;
+    private MainView view;
+
+    public UserController(User model, MainView view) {
+        this.model = model;
+        this.view = view;
+    }
+
+    public void updateUserName(String name) {
+        model.setName(name);
+        view.displayMessage("Nome atualizado para: " + model.getName());
+    }
+}
+
+Fluxo de Interação
+O usuário interage com a View (ex.: clica em um botão ou insere dados).
+A View notifica o Controller sobre o evento.
+O Controller:
+Processa a entrada do usuário.
+Atualiza os dados no Model (se necessário).
+O Model notifica o Controller sobre alterações.
+O Controller atualiza a View com as novas informações.
+
+
+Multithreading:
+No Swing, todas as operações que afetam a interface devem ocorrer na Event Dispatch Thread para evitar problemas de concorrência.
+
+Lightweight e Heavyweight:
+Evite misturar componentes leves e pesados, pois eles podem causar problemas de sobreposição e desenho.
+Use apenas componentes leves para manter a consistência visual e comportamental.
