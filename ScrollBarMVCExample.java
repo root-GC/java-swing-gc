@@ -1,6 +1,13 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 //(Normalmente eh armazenado em pacotes)
 // MODELO: Gerencia os dados e o estado da barra de rolagem.
@@ -128,4 +135,3 @@ public class ScrollBarMVCExample {
         });
     }
 }
-
